@@ -1,12 +1,17 @@
 #import Flask class
-from multiprocessing import context
 from flask import Flask, request, make_response, redirect, render_template
 
 #instantiate Flask class
 app = Flask(__name__)  #__name__ is the name of the current python module
 
+app.config['Secret_Key'] = 'ThisIsSecret'
+
 todos = ['Finish homework', 'Go to the gym', 'Go to the store']
 
+#error handler for not page found
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html', error=error)
 
 #route() decorator binds a function to a URL
 @app.route('/')  
