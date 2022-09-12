@@ -9,7 +9,7 @@
 
 <div class="container">
         
-    <form class="m-auto w-25" method="POST" action="{{ url_for('hello') }}">
+    <form class="m-auto w-25" method="POST" action="{{ url_for('auth.login') }}">
         <div class="form-group">
             {{ login_form.username.label}}    
             {{ login_form.username(class_="form-control") }}    

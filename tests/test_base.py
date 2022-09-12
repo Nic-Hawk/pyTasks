@@ -36,3 +36,11 @@ class MainTest(TestCase):
     def test_auth_login_template(self):
         self.client.get(url_for('auth.login')) #get the response of /auth/login
         self.assertTemplateUsed('login.html') #check if the response uses the login.html template
+
+    # def test_auth_login_post(self):
+    #     fake_form = {
+    #         'username': 'fake',
+    #         'password': 'fake-password'
+    #     }
+    #     response = self.client.post(url_for('auth.login'), data=fake_form)
+    #     self.assertRedirects(response, url_for('index'))
