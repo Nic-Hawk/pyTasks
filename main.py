@@ -1,28 +1,19 @@
 #import Flask class
-from flask import Flask, request, make_response, redirect, render_template, session, redirect, url_for, flash
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
+from flask import request, make_response, redirect, render_template, session, redirect, url_for, flash
 import unittest
 
-#instantiate Flask class
-app = Flask(__name__)  #__name__ is the name of the current python module
+from app import create_app
+from app.forms import Login_Form
 
-app.config['SECRET_KEY'] = 'SUPER SECRETO'
+app =  create_app()
 
 todos = ['Finish homework', 'Go to the gym', 'Go to the store']
 
-
-class Login_Form(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Send')
-
-
 @app.cli.command()
 def test():
-    test = unittest.TestLoader().discover('tests')
-    unittest.TextTestRunner().run(test)
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner().run(tests)
+
 
 #error handler for not page found
 @app.errorhandler(404)

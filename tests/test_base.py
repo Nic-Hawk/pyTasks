@@ -1,4 +1,3 @@
-import imp
 from urllib import response
 from flask_testing import TestCase
 from flask import current_app, url_for
@@ -26,3 +25,14 @@ class MainTest(TestCase):
     def test_hello_get(self): #test if the hello page is accessible with GET
         response = self.client.get(url_for('hello')) #get the response of /hello
         self.assert200(response) #check if the response is 200 OK
+
+    def test_auth_blueprint_exists(self):
+        self.assertIn('auth', self.app.blueprints) #check if the auth blueprint exists in the app  
+
+    def test_auth_login_get(self):
+        response = self.client.get(url_for('auth.login')) #get the response of /auth/login
+        self.assert200(response) #check if the response is 200 OK
+
+    def test_auth_login_template(self):
+        self.client.get(url_for('auth.login')) #get the response of /auth/login
+        self.assertTemplateUsed('login.html') #check if the response uses the login.html template
